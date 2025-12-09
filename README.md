@@ -19,7 +19,7 @@ A retrieval-augmented generation (RAG) system for legal question answering over 
 ## Introduction
 
 The growing availability of digital legal documents has created both an opportunity and a challenge for practitioners: while case law and contracts are more accessible than ever, locating the precise passages that answer a focused legal question remains slow and error-prone. 
-CaseQuery addresses this gap by building a comprehensive RAG system for legal question answering. The system combines multiple retrieval strategies—BM25, intra-document retrieval, dense embeddings, and hybrid sparse+dense retrieval with reranking—to systematically evaluate how retrieval choices affect both retrieval quality and downstream answer reliability. Every answer is explicitly linked to underlying cases, clauses, or sections, enabling users to verify every claim. A rigorous evaluation pipeline  quantifies how retrieval choices shape the trustworthiness of legal LLM assistants.
+CaseQuery addresses this gap by building a comprehensive RAG system for legal question answering. The system combines multiple retrieval strategies - BM25, intra-document retrieval, dense embeddings, and hybrid sparse+dense retrieval with reranking, to systematically evaluate how retrieval choices affect both retrieval quality and downstream answer reliability. Every answer is explicitly linked to underlying cases, clauses, or sections, enabling users to verify every claim. A rigorous evaluation pipeline  quantifies how retrieval choices shape the trustworthiness of legal LLM assistants.
 
 ## Problem Statement
 
