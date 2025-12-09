@@ -1,3 +1,4 @@
+
 # CaseQuery
 
 A retrieval-augmented generation (RAG) system for legal question answering over case law and contracts. CaseQuery combines dense embeddings (FAISS) and traditional retrieval baselines (BM25) with large language models to provide grounded, verifiable answers to legal questions.
@@ -8,11 +9,12 @@ A retrieval-augmented generation (RAG) system for legal question answering over 
 - [Problem Statement](#problem-statement)
 - [Datasets](#datasets)
 - [Architecture](#architecture)
+- [Project Structure](#project-structure)
 - [Methodology](#methodology)
 - [Getting Started](#getting-started)
 - [Usage](#usage)
 - [Results](#results)
-- [Project Structure](#project-structure)
+
 
 ## Introduction
 
@@ -61,6 +63,59 @@ The system consists of five integrated layers:
 
 ### Interface Layer
 - Interactive CLI demo for both RAG and zero-shot modes
+
+## Project Structure
+
+```
+caseQuery/
+├── app/                          # Application interface
+│   ├── __init__.py
+│   └── cli.py                   # Interactive CLI demo
+├── data/                         # Data artifacts
+│   ├── eval_queries.jsonl       # Evaluation queries
+│   └── generation_eval.jsonl    # Generation evaluation examples
+├── notebooks/                    # Test and analysis scripts
+│   ├── test_bm25.py
+│   ├── test_rag.py
+│   ├── test_retriever.py
+│   └── test_zero_shot.py
+├── src/                         # Core source code
+│   ├── config.py               # Configuration settings
+│   ├── baselines/              # Baseline implementations
+│   │   ├── bm25_retriever.py   # BM25 baseline retriever
+│   │   └── zero_shot_llm.py    # Zero-shot LLM baseline
+│   ├── data_prep/              # Data preparation
+│   │   ├── prepare_corpus.py   # Unify CUAD and CaseLaw data
+│   │   └── chunk_corpus.py     # Chunk documents
+│   ├── evaluation/             # Evaluation metrics
+│   │   ├── generation_eval.py  # Generation quality metrics
+│   │   └── retrieval_eval.py   # Retrieval metrics (Recall@k, MRR)
+│   ├── generator/              # Generation components
+│   │   ├── llm_client.py       # LLM API wrapper
+│   │   ├── prompting.py        # Prompt construction
+│   │   └── rag_pipeline.py     # RAG orchestration
+│   └── retriever/              # Retrieval components
+│       ├── embed_and_index.py  # Embedding and indexing
+│       └── faiss_retriever.py  # FAISS retriever
+└── README.md                    # This file
+```
+
+## Key Components
+
+### `src/retriever/faiss_retriever.py`
+Implements dense semantic retrieval using FAISS with all-MiniLM-L6-v2 embeddings.
+
+### `src/baselines/bm25_retriever.py`
+Traditional term-frequency baseline using BM25Okapi for comparison.
+
+### `src/generator/rag_pipeline.py`
+Orchestrates the complete RAG workflow: retrieval → prompting → generation.
+
+### `src/baselines/zero_shot_llm.py`
+Baseline LLM queries without retrieval or context.
+
+### `src/evaluation/retrieval_eval.py` and `src/evaluation/generation_eval.py`
+Evaluation scripts for systematic metric collection and comparison.
 
 ## Methodology
 
@@ -220,58 +275,4 @@ The RAG system achieves approximately **50% relative improvement in ROUGE-L** an
 - RAG substantially improves answer quality compared to zero-shot LLMs
 - Retrieved context effectively grounds answers and reduces hallucinations
 - Citation linkage enables users to verify claims against source documents
-
-## Project Structure
-
-```
-caseQuery/
-├── app/                          # Application interface
-│   ├── __init__.py
-│   └── cli.py                   # Interactive CLI demo
-├── data/                         # Data artifacts
-│   ├── eval_queries.jsonl       # Evaluation queries
-│   └── generation_eval.jsonl    # Generation evaluation examples
-├── notebooks/                    # Test and analysis scripts
-│   ├── test_bm25.py
-│   ├── test_rag.py
-│   ├── test_retriever.py
-│   └── test_zero_shot.py
-├── src/                         # Core source code
-│   ├── config.py               # Configuration settings
-│   ├── baselines/              # Baseline implementations
-│   │   ├── bm25_retriever.py   # BM25 baseline retriever
-│   │   └── zero_shot_llm.py    # Zero-shot LLM baseline
-│   ├── data_prep/              # Data preparation
-│   │   ├── prepare_corpus.py   # Unify CUAD and CaseLaw data
-│   │   └── chunk_corpus.py     # Chunk documents
-│   ├── evaluation/             # Evaluation metrics
-│   │   ├── generation_eval.py  # Generation quality metrics
-│   │   └── retrieval_eval.py   # Retrieval metrics (Recall@k, MRR)
-│   ├── generator/              # Generation components
-│   │   ├── llm_client.py       # LLM API wrapper
-│   │   ├── prompting.py        # Prompt construction
-│   │   └── rag_pipeline.py     # RAG orchestration
-│   └── retriever/              # Retrieval components
-│       ├── embed_and_index.py  # Embedding and indexing
-│       └── faiss_retriever.py  # FAISS retriever
-└── README.md                    # This file
-```
-
-## Key Components
-
-### `src/retriever/faiss_retriever.py`
-Implements dense semantic retrieval using FAISS with all-MiniLM-L6-v2 embeddings.
-
-### `src/baselines/bm25_retriever.py`
-Traditional term-frequency baseline using BM25Okapi for comparison.
-
-### `src/generator/rag_pipeline.py`
-Orchestrates the complete RAG workflow: retrieval → prompting → generation.
-
-### `src/baselines/zero_shot_llm.py`
-Baseline LLM queries without retrieval or context.
-
-### `src/evaluation/retrieval_eval.py` and `src/evaluation/generation_eval.py`
-Evaluation scripts for systematic metric collection and comparison.
-
 
