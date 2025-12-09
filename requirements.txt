@@ -1,0 +1,10 @@
+numpy
+faiss-cpu
+sentence-transformers
+tqdm
+requests
+rank_bm25
+rouge-score
+bert-score
+torch
+transformers
