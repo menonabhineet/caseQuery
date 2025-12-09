@@ -34,7 +34,7 @@ Given a corpus of legal documents (contracts and case law) and a natural languag
 CaseQuery uses two complementary legal datasets:
 
 ### 1. Contract Understanding Atticus Dataset (CUAD)
-- **Source**: https://huggingface.co/datasets/theatticusproject/cuad
+- **Source**: [CUAD Dataset](https://zenodo.org/records/4595826)
 - **Description**: A corpus of 13,000+ labels across 510 commercial legal contracts manually labeled to identify 41 categories of important clauses that lawyers look for when reviewing contracts in connection with corporate transactions.
 
 ### 2. CaseLaw Access Project (CAP)
@@ -193,6 +193,10 @@ pip install -r requirements.txt
 3. Set up your OpenRouter API key (add to environment or config)
 
 ### Data Preparation
+
+```bash
+download both the datasets mentioned above, unzip and  paste both folders within "data" folder
+```
 
 To prepare the corpus:
 
