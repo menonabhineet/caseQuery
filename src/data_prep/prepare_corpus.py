@@ -37,10 +37,6 @@ def iter_cuad_docs() -> Iterator[Dict]:
 def extract_caselaw_text(record: Dict) -> str:
     """
     Extract main opinion text from a single caselaw JSON record.
-
-    NOTE: The exact structure depends on the Kaggle dataset.
-    This is a *guess* based on typical CaseLaw / CourtListener format.
-    If it errors, print(record.keys()) and adjust accordingly.
     """
     # Try a few common patterns:
     casebody = record.get("casebody") or record.get("case_body") or {}
